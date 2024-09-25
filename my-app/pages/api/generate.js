@@ -10,7 +10,7 @@ export default async function handler(req, res) {
       throw new Error('FLASK_BACKEND_URL environment variable is not set');
     }
 
-    const response = await axios.post(`${flaskBackendUrl}/api/generate`, {
+    const response = await axios.post(`${flaskBackendUrl}`, {
       character,
       message,
       use_fine_tuned,
