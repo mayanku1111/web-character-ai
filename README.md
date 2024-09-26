@@ -1,5 +1,5 @@
 # web-character-ai
-This repo is about making character ai like interface with options of fine tuning and contextual adaptation
+This repo is about making character.ai like interface with options of fine tuning and contextual adaptation
 
 ## It is deployed on vercel 
 ## You can try it out here :- [Link](https://my-app-kappa-beryl.vercel.app/)
