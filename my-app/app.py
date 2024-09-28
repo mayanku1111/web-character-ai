@@ -29,7 +29,7 @@ login(huggingface_token)
 
 def generate_system_message(character):
     prompt = f"Create a system message for a character with the following details:\nName: {character['name']}\nTagline: {character['tagline']}\nDescription: {character['description']}"
-    response = openai.ChatCompletion.create(
+    response = openai.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
             {
@@ -68,7 +68,7 @@ def generate_example(character, system_message, prev_examples, temperature=0.7):
                 "content": example
             })
 
-    response = openai.ChatCompletion.create(
+    response = openai.chat.completions.create(
         model="gpt-4o-mini",
         messages=messages,
         temperature=temperature,
@@ -92,7 +92,7 @@ def extract_prompt_response(example):
         return None, None
 
 
-@app.route('/api/contextual-adaptation', methods=['POST'])
+@app.route('/api/generate', methods=['POST'])
 def contextual_adaptation():
     data = request.json
     character = data['character']
@@ -113,7 +113,7 @@ def contextual_adaptation():
     return jsonify({"response": response.choices[0].message['content']})
 
 
-@app.route('/api/fine-tune', methods=['POST'])
+@app.route('/api/generate', methods=['POST'])
 def fine_tune():
     data = request.json
     character = data['character']
