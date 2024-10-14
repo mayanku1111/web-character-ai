@@ -1,26 +1,25 @@
 import axios from 'axios';
 
 export default async function handler(req, res) {
-  const { character, message, use_fine_tuned } = req.body;
+  if (req.method === 'POST') {
+    const { character, message } = req.body; // Removed use_fine_tuned
 
-  try {
-    const flaskBackendUrl = process.env.FLASK_BACKEND_URL;
+    try {
+      // Send the data to the backend (FastAPI or Flask)
+      const response = await axios.post('http://127.0.0.1:8000/api/generate', {
+        character,
+        message,
+      });
 
-    if (!flaskBackendUrl) {
-      throw new Error('FLASK_BACKEND_URL environment variable is not set');
+      // Pass the response back to the frontend
+      res.status(200).json({ response: response.data.response });
+    } catch (error) {
+      console.error('Error getting response from backend:', error);
+      res.status(500).json({ error: 'Error generating response.' });
     }
-
-    const response = await axios.post(`${flaskBackendUrl}`, {
-      character,
-      message,
-      use_fine_tuned,
-    },{
-        timeout: 10000
-    });
-
-    res.status(200).json({ response: response.data.response });
-  } catch (error) {
-    console.error('Error generating generate AI response:', error);
-    res.status(500).json({ error: 'Error generating generate AI response.' });
+  } else {
+    // If it's not a POST request, return a method not allowed error
+    res.setHeader('Allow', ['POST']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
