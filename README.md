@@ -6,6 +6,14 @@ This repo is about making character.ai like interface with options of fine tunin
 
 <img width="841" alt="Screenshot 2024-09-26 at 6 11 22 PM" src="https://github.com/user-attachments/assets/b14bfa33-be85-42fa-b262-148f2cd609cc">
 
+# How to run it locally
+
+On terminal run:
+
 ''' 
-how to run it locally
+export OPENAI_API_KEY="Your api key"
+cd my-app
+uvicorn main:app
 '''
+
+
