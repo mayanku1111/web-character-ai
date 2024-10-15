@@ -8,12 +8,14 @@ This repo is about making character.ai like interface with options of fine tunin
 
 # How to run it locally
 
-On terminal run:
+On terminal run:(For starting FASTAPI
 
 ```
 export OPENAI_API_KEY="Your api key"
 cd my-app
 uvicorn main:app
 ```
-
-
+Add another terminal and run:
+```
+npm start
+```
